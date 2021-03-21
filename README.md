@@ -1,5 +1,5 @@
 
-## DEscription ##
+## Description ##
 * We are using ReactJS with MaterialUI for designing UI.
 * axios is used to create API calls.
 * when user enters necessary data he can press Send Mail Button.
