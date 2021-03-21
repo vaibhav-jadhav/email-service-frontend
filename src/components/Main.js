@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Grid, Paper, Button } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
+import axios from "axios";
 const rowStyle = {
   paddingLeft: "50px",
   paddingRight: "50px",
@@ -10,7 +11,7 @@ const Main = () => {
   const [emailRecipient, setEmailRecipient] = useState("");
   const [emailSubject, setEmailSubject] = useState("");
   const [emailBody, setEmailBody] = useState("");
-
+  const sendMail = (emailText) => {};
   const onEmailRecipientValueChanged = (event) => {
     setEmailRecipient(event.target.value);
   };
@@ -20,14 +21,14 @@ const Main = () => {
   const onEmailBodyValueChanged = (event) => {
     setEmailBody(event.target.value);
   };
-  const sendButtonPressed = () =>{
-    const emailText={
-        "to": emailRecipient,
-        "subject":emailSubject,
-        "text": emailBody
-    }
-    console.log(emailText)
-  }
+  const sendButtonPressed = () => {
+    const emailText = {
+      to: emailRecipient,
+      subject: emailSubject,
+      text: emailBody,
+    };
+    sendMail(emailText);
+  };
   return (
     <>
       <Grid
@@ -41,16 +42,10 @@ const Main = () => {
       >
         <Paper>
           <Grid item style={rowStyle}>
-            <TextField
-              onChange={onEmailRecipientValueChanged}
-              label="To:"
-            />
+            <TextField onChange={onEmailRecipientValueChanged} label="To:" />
           </Grid>
           <Grid item style={rowStyle}>
-            <TextField
-              onChange={onEmailSubjectValueChanged}
-              label="Subject:"
-            />
+            <TextField onChange={onEmailSubjectValueChanged} label="Subject:" />
           </Grid>
           <Grid item style={rowStyle}>
             <textarea
@@ -62,7 +57,11 @@ const Main = () => {
             ></textarea>
           </Grid>
           <Grid item>
-            <Button onClick={()=>sendButtonPressed()} variant="contained" color="primary">
+            <Button
+              onClick={() => sendButtonPressed()}
+              variant="contained"
+              color="primary"
+            >
               Send Mail
             </Button>
           </Grid>
