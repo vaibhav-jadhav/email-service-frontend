@@ -10,7 +10,24 @@ const Main = () => {
   const [emailRecipient, setEmailRecipient] = useState("");
   const [emailSubject, setEmailSubject] = useState("");
   const [emailBody, setEmailBody] = useState("");
-  
+
+  const onEmailRecipientValueChanged = (event) => {
+    setEmailRecipient(event.target.value);
+  };
+  const onEmailSubjectValueChanged = (event) => {
+    setEmailSubject(event.target.value);
+  };
+  const onEmailBodyValueChanged = (event) => {
+    setEmailBody(event.target.value);
+  };
+  const sendButtonPressed = () =>{
+    const emailText={
+        "to": emailRecipient,
+        "subject":emailSubject,
+        "text": emailBody
+    }
+    console.log(emailText)
+  }
   return (
     <>
       <Grid
@@ -24,21 +41,28 @@ const Main = () => {
       >
         <Paper>
           <Grid item style={rowStyle}>
-            <TextField id="standard-basic" label="To:" />
+            <TextField
+              onChange={onEmailRecipientValueChanged}
+              label="To:"
+            />
           </Grid>
           <Grid item style={rowStyle}>
-            <TextField id="standard-basic" label="Subject:" />
+            <TextField
+              onChange={onEmailSubjectValueChanged}
+              label="Subject:"
+            />
           </Grid>
           <Grid item style={rowStyle}>
             <textarea
+              onChange={onEmailBodyValueChanged}
               name="Text1"
               cols="30"
               rows="5"
-              placeHolder="Mail body"
+              placeholder="Mail body"
             ></textarea>
           </Grid>
           <Grid item>
-            <Button variant="contained" color="primary">
+            <Button onClick={()=>sendButtonPressed()} variant="contained" color="primary">
               Send Mail
             </Button>
           </Grid>
