@@ -11,13 +11,38 @@ const Main = () => {
   const [emailRecipient, setEmailRecipient] = useState("");
   const [emailSubject, setEmailSubject] = useState("");
   const [emailBody, setEmailBody] = useState("");
-  const sendMail = (emailText) => {};
+  const [responseAfterAPIcall,setResponseAfterAPIcall]=useState("");
+  /*
+    Sends API request to send email
+
+  */
+  const sendMail = (emailText) => {
+    axios({
+      method: "post",
+      url: "emailService",
+      data: emailText,
+    }).then(response=>{
+        console.log(response);
+        setResponseAfterAPIcall(response.data.message)
+    }).catch(error=>{
+        console.error(error)
+    })
+  };
+  /*
+    onChange handler for  Recipient address
+  */
   const onEmailRecipientValueChanged = (event) => {
     setEmailRecipient(event.target.value);
   };
+  /*
+    onChange handler for  email subject
+  */
   const onEmailSubjectValueChanged = (event) => {
     setEmailSubject(event.target.value);
   };
+   /*
+    onChange handler for  email body
+  */
   const onEmailBodyValueChanged = (event) => {
     setEmailBody(event.target.value);
   };
@@ -64,6 +89,9 @@ const Main = () => {
             >
               Send Mail
             </Button>
+          </Grid>
+          <Grid item>
+              {responseAfterAPIcall}
           </Grid>
         </Paper>
       </Grid>
